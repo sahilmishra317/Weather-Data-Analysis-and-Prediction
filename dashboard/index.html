@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Analytics Dashboard</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass">
+            <div class="logo">
+                <span class="logo-icon">🌤️</span>
+                <h2>Weathr.io</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#overview">Overview</a></li>
+                    <li><a href="#trends">Historical Trends</a></li>
+                    <li><a href="#models">Model Comparison</a></li>
+                    <li><a href="#forecast">Forecast Prediction</a></li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar"><img src="assets/profile_avatar.png" alt="Profile" style="width:100%; height:100%; border-radius:50%; object-fit:cover;"></div>
+                <div>
+                    <p class="name">Data Analyst</p>
+                    <p class="role">Internship Project</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div>
+                    <h1>Weather Data Analysis & Prediction</h1>
+                    <p class="subtitle">Predictive analytics using Time-Series Machine Learning Models</p>
+                </div>
+            </header>
+
+            <section id="current-weather-hero" class="glass forecast-hero hover-effect">
+                <div class="weather-location-date">
+                    <h2 class="location"><span style="color: var(--accent-1); margin-right: 8px;">📍</span>Global Weather Station</h2>
+                    <p id="current-date-large" class="date-large">Wednesday, March 9, 2016</p>
+                </div>
+                
+                <div class="hero-main-wrapper">
+                    <div class="hero-main">
+                        <div class="weather-icon-large">🌤️</div>
+                        <div class="temp-display">
+                            <span id="current-temp" class="temp-value">11.0</span>
+                            <span class="temp-unit">°C</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-details">
+                        <div class="detail-card glass hover-effect">
+                            <span class="detail-icon" style="color: #3b82f6;">💧</span>
+                            <div class="detail-info">
+                                <span class="detail-label">Humidity</span>
+                                <span id="current-humidity" class="detail-value">68%</span>
+                            </div>
+                        </div>
+                        <div class="detail-card glass hover-effect">
+                            <span class="detail-icon" style="color: #10b981;">💨</span>
+                            <div class="detail-info">
+                                <span class="detail-label">Wind</span>
+                                <span id="current-wind" class="detail-value">1.5 km/h</span>
+                            </div>
+                        </div>
+                        <div class="detail-card glass hover-effect">
+                            <span class="detail-icon" style="color: #8b5cf6;">☁️</span>
+                            <div class="detail-info">
+                                <span class="detail-label">Cloud Cover</span>
+                                <span id="current-clouds" class="detail-value">62%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="overview" class="stats-grid">
+                <div class="stat-card glass hover-effect">
+                    <img src="assets/icon_dataset.png" alt="Dataset" class="stat-icon">
+                    <div class="stat-content">
+                        <h3>Dataset Size</h3>
+                        <div class="value counter" data-target="3650">0</div>
+                        <p class="label">Days of Historical Data</p>
+                    </div>
+                </div>
+                <div class="stat-card glass hover-effect">
+                    <img src="assets/icon_model.png" alt="Model" class="stat-icon">
+                    <div class="stat-content">
+                        <h3>Best Model</h3>
+                        <div class="value">Random Forest</div>
+                        <p class="label">Highest R² Score</p>
+                    </div>
+                </div>
+                <div class="stat-card glass hover-effect">
+                    <img src="assets/icon_predict.png" alt="Predictions" class="stat-icon">
+                    <div class="stat-content">
+                        <h3>Prediction Horizon</h3>
+                        <div class="value counter" data-target="365">0</div>
+                        <p class="label">Days Forecasted</p>
+                    </div>
+                </div>
+                <div class="stat-card glass hover-effect">
+                    <img src="assets/icon_feature.png" alt="Features" class="stat-icon">
+                    <div class="stat-content">
+                        <h3>Features Used</h3>
+                        <div class="value counter" data-target="7">0</div>
+                        <p class="label">Time-based & Rolling Means</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="trends" class="chart-section">
+                <div class="section-header">
+                    <h2>Seasonal Temperature Averages</h2>
+                    <p>Aggregated historical temperature data grouped by month.</p>
+                </div>
+                <div class="chart-container glass">
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </section>
+
+            <section id="models" class="chart-section splits">
+                <div class="split-col">
+                    <div class="section-header">
+                        <h2>Model Performance Comparison</h2>
+                        <p>Comparing RMSE and MAE across the three implemented regression models. Lower values indicate better performance.</p>
+                    </div>
+                    <div class="chart-container glass">
+                        <canvas id="metricsChart"></canvas>
+                    </div>
+                </div>
+                <div class="split-col">
+                    <div class="section-header">
+                        <h2>R² Score Comparison</h2>
+                        <p>Higher is better (Closer to 1.0)</p>
+                    </div>
+                    <div class="chart-container glass">
+                        <canvas id="r2Chart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="forecast" class="chart-section">
+                <div class="section-header">
+                    <h2>1-Year Temperature Forecast</h2>
+                    <p>Predictions generated using the Random Forest Regressor over the next 365 days.</p>
+                </div>
+                <div class="chart-container glass large-chart">
+                    <canvas id="forecastChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Main Logic -->
+    <script src="app.js"></script>
+</body>
+</html>

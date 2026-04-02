@@ -1,0 +1,17 @@
+{
+    "Linear Regression": {
+        "MAE": 2.51,
+        "RMSE": 3.11,
+        "R2": 0.879
+    },
+    "Polynomial Regression": {
+        "MAE": 2.54,
+        "RMSE": 3.15,
+        "R2": 0.876
+    },
+    "Random Forest": {
+        "MAE": 2.62,
+        "RMSE": 3.27,
+        "R2": 0.866
+    }
+}
